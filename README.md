@@ -1,8 +1,12 @@
 #AJAX Queue/Cache/Abort/Block Manager v. 3.0
 Helps you to manage AJAX requests and responses (i.e. abort requests, block requests, order requests). It is inspired by the AJAX Queue Plugin and the AjaxQueue document in the jQuery-Wiki.
 
-$.manageAjax.create (uniqueName, options)
 Creates a new ajaxmanager and returns it.
+```
+$.manageAjax.create (uniqueName, options)
+
+```
+
 
 ##Takes a list of options:
 
@@ -33,58 +37,72 @@ Creates a new ajaxmanager and returns it.
 
 First you have to construct/configure a new Ajaxmanager
 
-//create an ajaxmanager named someAjaxProfileName
+Create an ajaxmanager named someAjaxProfileName
+```
 	var someManagedAjax = $.manageAjax.create('someAjaxProfileName', { queue: true, cacheResponse: true });
+```
 
 You have two different ways to call your methods (don´t mix them).
 
 Calling Ajaxmanager with uniqueName and add an ajaxrequest
+```
 	$.manageAjax.add('someAjaxProfileName', { success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
+```
 
 Calling Ajaxmanager with the returned ajaxmanger-Object and add an ajaxrequest with the returned object
+```
 	$.manageAjax.add({ success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
+```
 
 Example:
-//Create an ajaxmanager named cacheQueue
+
+Create an ajaxmanager named cacheQueue
+```
 	var ajaxManager = $.manageAjax.create('cacheQueue', { queue: true, cacheResponse: true }); //and add an ajaxrequest with the returned object ajaxManager.add({ success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
+```
 
-//Or only with the uniqueName parameter
-// Generate an ajaxmanger named clearQueue
+Or only with the uniqueName parameter
+Generate an ajaxmanger named clearQueue
+```
 	$.manageAjax.create('clearQueue', {queue: 'clear', maxRequests: 2}); //and add an ajaxrequest with the name parameter $.manageAjax.add('clearQueue', { success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
-	
+```	
 
-// Destroys an existing Ajaxmanager. Any requests in progress are aborted and waiting requests are cleared.
+Destroys an existing Ajaxmanager. Any requests in progress are aborted and waiting requests are cleared.
+```
 	$.manageAjax.destroy (uniqueName)
+```
+
+
 
 ##Events/Callbacks:
 
 The ajaxmanager adds some new events or enhances some existing callbacks.
 
-name	       									|           arguments					|				new/enhanced
+###NAME  >> ARGUMENTS
 
-beforeCreate (local)							|     XHR-ID, options					|					new
+*	beforeCreate (local) >> XHR-ID, options
 
-beforeSend (local)								|	XMLHttpRequest, options				|	enhanced: options arguments is passed
+*	beforeSend (local) >> XMLHttpRequest, options
 
-managerName + 'AjaxStart' (global)				|  			event						|					new
+*	managerName + 'AjaxStart' (global) >> event
 
-complete (local)	 							|		xhr*, status, options			|	enhanced: the options arguments is additionally passed.
+*	complete (local) >> xhr*, status, options
 
-managerName + 'AjaxComplete' (global)	 		|	event, xhr*, status, options		|					new
+*	managerName + 'AjaxComplete' (global) >> event, xhr*, status, options
 
-managerName + 'DOMComplete' (DOM-Event**)	 	|	event, xhr*, status, options		|					new
+*	managerName + 'DOMComplete' (DOM-Event**) >> event, xhr*, status, options
 
-'DOMComplete' (DOM-Event**)	 					|	event, xhr*, status, options		|					new
+*	'DOMComplete' (DOM-Event**) >> event, xhr*, status, options
 
-success (local)	 								|	data, textStatus, xhr*, options		|	enhanced: the options arguments is additionally passed.
+*	success (local) >> data, textStatus, xhr*, options
 
-managerName + 'AjaxSuccess' (global)	 		|	event, xhr, options, data			|					new
+*	managerName + 'AjaxSuccess' (global) >> event, xhr, options, data
 
-managerName + 'DOMSuccess' (DOM-Event**)	 	|	event, data, options				|					new
+*	managerName + 'DOMSuccess' (DOM-Event**) >> event, data, options
 
-'DOMSuccess' (DOM-Event**)	 					|	event, data, options				|					new
+*	'DOMSuccess' (DOM-Event**) >> event, data, options
 
-managerName + 'AjaxStop' (global)	 			|	event								|					new
+*	managerName + 'AjaxStop' (global) >> event
 
 
 *Note: If the cacheResponse - option is true, the xhr-argument can be an empty object.
