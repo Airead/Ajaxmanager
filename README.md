@@ -37,38 +37,90 @@ $.manageAjax.create (uniqueName, options)
 
 First you have to construct/configure a new Ajaxmanager
 
-Create an ajaxmanager named someAjaxProfileName
 ```
-	var someManagedAjax = $.manageAjax.create('someAjaxProfileName', { queue: true, cacheResponse: true });
+	// Create an ajaxmanager named someAjaxProfileName
+	var someManagedAjax = $.manageAjax.create('someAjaxProfileName',
+		{
+			queue: true,
+			cacheResponse: true
+		}
+	);
 ```
 
 You have two different ways to call your methods (don´t mix them).
 
-Calling Ajaxmanager with uniqueName and add an ajaxrequest
+
 ```
-	$.manageAjax.add('someAjaxProfileName', { success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
+	// Calling Ajaxmanager with uniqueName and add an ajaxrequest
+	$.manageAjax.add('someAjaxProfileName',
+		{
+			success: function(html) {
+				$('ul').append('<li>'+html+'</li>');
+			}, 
+			url: 'test.html'
+		}
+	);
 ```
 
-Calling Ajaxmanager with the returned ajaxmanger-Object and add an ajaxrequest with the returned object
 ```
-	$.manageAjax.add({ success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
+	// Calling Ajaxmanager with the returned ajaxmanger-Object
+	// and add an ajaxrequest with the returned object
+	$.manageAjax.add(
+		{
+			success: function(html) {
+				$('ul').append('<li>'+html+'</li>');
+			},
+			url: 'test.html'
+		}
+	);
 ```
 
-Example:
+##Examples :
 
-Create an ajaxmanager named cacheQueue
 ```
-	var ajaxManager = $.manageAjax.create('cacheQueue', { queue: true, cacheResponse: true }); //and add an ajaxrequest with the returned object ajaxManager.add({ success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
+	// Create an ajaxmanager named cacheQueue
+	var ajaxManager = $.manageAjax.create('cacheQueue',
+		{
+			queue: true,
+			cacheResponse: true
+		}
+	);
+	// and add an ajaxrequest with the returned object
+	ajaxManager.add(
+		{
+			success: function(html) {
+				$('ul').append('<li>'+html+'</li>');
+			},
+			url: 'test.html'
+		}
+	);
 ```
 
 Or only with the uniqueName parameter
-Generate an ajaxmanger named clearQueue
+
 ```
-	$.manageAjax.create('clearQueue', {queue: 'clear', maxRequests: 2}); //and add an ajaxrequest with the name parameter $.manageAjax.add('clearQueue', { success: function(html) { $('ul').append('<li>'+html+'</li>'); }, url: 'test.html' });
+	// Generate an ajaxmanger named clearQueue
+	$.manageAjax.create('clearQueue',
+		{
+			queue: 'clear',
+			maxRequests: 2
+		}
+	);
+	// and add an ajaxrequest with the name parameter
+	$.manageAjax.add('clearQueue',
+		{
+			success: function(html) {
+				$('ul').append('<li>'+html+'</li>');
+			},
+			url: 'test.html'
+		}
+	);
 ```	
 
-Destroys an existing Ajaxmanager. Any requests in progress are aborted and waiting requests are cleared.
+
 ```
+	// Destroys an existing Ajaxmanager.
+	// Any requests in progress are aborted and waiting requests are cleared.
 	$.manageAjax.destroy (uniqueName)
 ```
 
