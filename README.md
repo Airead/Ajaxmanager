@@ -1,14 +1,14 @@
-#AJAX Queue/Cache/Abort/Block Manager v. 3.0
+##AJAX Queue/Cache/Abort/Block Manager v. 3.0
 Helps you to manage AJAX requests and responses (i.e. abort requests, block requests, order requests). It is inspired by the AJAX Queue Plugin and the AjaxQueue document in the jQuery-Wiki.
 
-Creates a new ajaxmanager and returns it.
-```
-$.manageAjax.create (uniqueName, options)
 
 ```
+	//Creates a new ajaxmanager and returns it.
+	$.manageAjax.create(uniqueName, options);
+```
 
 
-##Takes a list of options:
+###Takes a list of options:
 
 *	normal [jQuery-Ajax-Options](http://docs.jquery.com/Ajax/jQuery.ajax#options)
 *	queue: (true|false|'clear') the queue-type specifies the queue-behaviour. The clear option clears the queue, before it adds a new ajax-task to the queue (similiar to: last in first out)
@@ -23,7 +23,7 @@ $.manageAjax.create (uniqueName, options)
 *	domSuccessTrigger (false | DOM-Element, DOMNodelist, Selector or jQuery-List). Triggers the events uniqueName + "DOMSuccess" and "DOMSuccess" on the specified element.
 
 
-##Your constructed ajaxmanager knows the following methods:
+###Your constructed ajaxmanager knows the following methods:
 
 *	add: ([uniqueName], options) returns an id of your XHR object and takes the following options:
 *	normal [jQuery-Ajax-Options](http://docs.jquery.com/Ajax/jQuery.ajax#options)
@@ -33,7 +33,7 @@ $.manageAjax.create (uniqueName, options)
 *	getXHR: ([uniqueName], id) Returns the XHR-Object, if it is already constructed or the queue-function
 
 
-##Note:
+###Note:
 
 First you have to construct/configure a new Ajaxmanager
 
@@ -130,7 +130,7 @@ Or only with the uniqueName parameter
 
 The ajaxmanager adds some new events or enhances some existing callbacks.
 
-###NAME  >> ARGUMENTS
+#####NAME  >> ARGUMENTS
 
 *	beforeCreate (local) >> XHR-ID, options
 
